@@ -46,28 +46,11 @@ public class FavouriteShopAuthenticator implements Authenticator {
     }
 
     private void challengeResponse(AuthenticationFlowContext context, String error) {
-        String accessCode = context.generateAccessCode();
-        String actionUrl = context.getActionUrl(accessCode).toString();
-
-        StringBuilder response = new StringBuilder("<html><head><title>Auth</title></head><body>");
-
         if (error != null) {
-            response.append("ERROR: " + error);
+            context.form().setError(error);
         }
 
-        response.append("<form method='POST' action='" + actionUrl + "'>");
-        response.append(" What is your favourite shop? <input name='shop' /><br>");
-        response.append(" <input type='submit' value='Submit' />");
-        response.append("</form></body></html>");
-        String html = response.toString();
-
-        Response jaxrsResponse = Response
-                .status(Response.Status.OK)
-                .type("text/html")
-                .entity(html)
-                .build();
-
-        context.challenge(jaxrsResponse);
+        context.challenge(context.form().createForm("favourite-shop.ftl"));
     }
 
     @Override

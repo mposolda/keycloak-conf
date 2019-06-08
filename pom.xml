@@ -200,7 +200,8 @@
     </dependencies>
 
     <modules>
-        <module>auth-secure-question</module>      
+        <module>auth-secure-question</module>
+        <module>themes</module>
     </modules>
 
     <repositories>
