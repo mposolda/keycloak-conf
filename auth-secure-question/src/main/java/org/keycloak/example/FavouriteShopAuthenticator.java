@@ -1,6 +1,5 @@
 package org.keycloak.example;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
@@ -37,13 +36,9 @@ public class FavouriteShopAuthenticator implements Authenticator {
         }
 
         String shopAttr = user.getFirstAttribute("favourite.shop");
-        if (shopAttr == null) {
-            challengeResponse(context, "No attribute 'favourite.shop' available on user");
-            return;
-        }
 
-        if (!shopAttr.equalsIgnoreCase(shopParam)) {
-            challengeResponse(context, "'" + shopParam + "' is not your favourite shop! It is: '" + shopAttr + "'");
+        if (shopAttr == null || !shopAttr.equalsIgnoreCase(shopParam)) {
+            challengeResponse(context, "'" + shopParam + "' is not your favourite shop!");
             return;
         }
 

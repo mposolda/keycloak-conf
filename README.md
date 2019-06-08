@@ -10,4 +10,11 @@ Steps to have demo working
 ```
     mvn clean install
     cp $KEYCLOAK_HOME/standalone/deployments/
+```
+
+4) Setup the authenticator in some realm. New authentication flow needs to be created from existing 'browser' flow.
+Add "Favourite Shop" authenticator as replacement of existing TOTP authenticator
+
+5) Create the user with attribute "favourite.shop" of any value. This value will then need to be provided when this 
+user wants to authenticate.
 
